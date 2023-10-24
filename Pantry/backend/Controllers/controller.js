@@ -5,7 +5,7 @@ const getAllProducts = async(req, res) => {
         const allProducts = await Product.find();
         res.send(allProducts);        
     } catch (err) {
-        res.status(500).json({msg: "Failed to retrieve products."});
+        res.status(500).json({msg: "Failed to retrieve products bro what is that? XD."});
     }
 };
 
