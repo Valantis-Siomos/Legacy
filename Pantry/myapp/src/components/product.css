@@ -1,0 +1,73 @@
+/* html {
+    background-color: #90ADC6;
+} */
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.productGrid {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.productCard {
+    display: flex;
+    margin: 15px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+    background-color: #E9EAEC;
+    box-sizing: border-box; 
+    border: 1px solid transparent;
+    border-radius: 5px; 
+    padding: 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+span {
+    color: #333652;
+    font-size: 1.2em;
+    font-family: Arial; 
+}
+
+.buttonsContainer {
+    flex-direction: row;
+    margin: 10px;
+}
+
+button {
+    font-family: Arial;
+    font-size: 1.2em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color:#333652;
+    color: #E9EAEC;
+    padding: 5px;
+}
+
+.deleteButton {
+    margin-right: 1em;
+} 
+
+.editForm {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+    background-color: #E9EAEC;
+    box-sizing: border-box; 
+    border: 1px solid transparent;
+    border-radius: 5px; 
+    padding: 15px; 
+    margin-left: 1em;
+}

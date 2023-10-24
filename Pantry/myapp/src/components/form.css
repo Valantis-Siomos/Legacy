@@ -1,0 +1,71 @@
+.formContainer {
+    display: flex;
+    width: 100%;
+    height: 30em;
+    margin-left: 35%;
+    margin-top: 3%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+    align-content: center;
+    background-color: #90ADC6;
+    color: #333652;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 30%;
+    flex-wrap: wrap;
+}
+
+label {
+    font-family: Arial;
+    font-size: 1.2em;
+}
+
+input[type=text] {
+    border: 1px solid transparent;
+    color: #333652;
+    font-size: 1.2em;
+    padding: 3px;
+}
+
+input[type=text]:focus {
+    border: 1px solid transparent;
+    outline: none;
+}
+
+input[type=date] {
+    border: 1px solid transparent;
+    outline: none;
+    font-size: 1.2em;
+    color: #333652;
+}
+
+input[type=date]:focus {
+    border: 1px solid transparent;
+    outline: none;
+    font-size: 1.2em;
+}
+
+button[type=submit] {
+    font-family: Arial;
+    font-size: 1.2em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color:#333652;
+    color: #E9EAEC;
+    padding: 5px;
+}
+
+input[type=submit] {
+    font-family: Arial;
+    font-size: 1.2em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color:#333652;
+    color: #E9EAEC;
+    padding: 5px;
+}
