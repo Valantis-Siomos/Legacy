@@ -1,0 +1,24 @@
+
+
+nav {
+    background-color: #333; /* Set background color */
+    padding: 20px 0; /* Add padding at the top and bottom of the navbar */
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center; /* Center align the list items */
+  }
+  
+  li {
+    display: inline;
+    margin-right: 100px; /* Add spacing between links */
+  }
+  
+  a {
+    text-decoration: none;
+    color: white; /* Set link color to white */
+    font-weight: bold;
+  }
