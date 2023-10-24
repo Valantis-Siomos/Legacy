@@ -4,7 +4,7 @@ require("dotenv").config();
 URI = process.env.MONGODB_URI;
 
 main()
-.then(() => console.log("connected succesfully"))
+.then(() => console.log("DB is connected successfully"))
 .catch((err ) => console.log(err));
 
 
