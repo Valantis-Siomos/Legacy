@@ -12,7 +12,7 @@ function Product({ getAllProducts, products }) {
   const [editProduct, setEditProduct] = useState({
     id: null,
     name: "",
-    expirationDate: Date,
+    expirationDate: new Date().toISOString().split("T")[0],
     category: ""
   });
 
@@ -25,19 +25,19 @@ function Product({ getAllProducts, products }) {
     getAllProducts();
   }
 
-  async function addProduct() {
-    try {
-      await axios.post("http://localhost:8000/products", newProduct);
-      setNewProduct({
-        name: "",
-        expirationDate: "",
-        category: ""
-      });
-      getAllProducts();
-    } catch (error) {
-      console.error("Error adding product:", error);
-    }
-  }
+  // async function addProduct() {
+  //   try {
+  //     await axios.post("http://localhost:8000/products", newProduct);
+  //     setNewProduct({
+  //       name: "",
+  //       expirationDate: "",
+  //       category: ""
+  //     });
+  //     getAllProducts();
+  //   } catch (error) {
+  //     console.error("Error adding product:", error);
+  //   }
+  // }
 
   async function updateProduct() {
     try {
@@ -101,7 +101,7 @@ function Product({ getAllProducts, products }) {
               />
               <input
                 type="text"
-                value={editProduct.expirationDate}
+                value={(editProduct.expirationDate.split("T")[0])}
                 onChange={(e) =>
                   setEditProduct({
                     ...editProduct,
