@@ -64,8 +64,11 @@ function Product({ getAllProducts, products }) {
       {products.map((product) => (
         <div key={product._id} className="productCard">
           <div className="product">
+            <label>Product:</label>
             <span>{product.name}</span>
-            <span>{product.expirationDate}</span>
+            <label>Expired Date:</label>
+            <span>{new Date(product.expirationDate).toLocaleDateString()}</span>
+            <label>Category:</label>
             <span>{product.category}</span>
             <div className="buttonsContainer">
             <button onClick={() => deleteProduct(product._id)} className="deleteButton">
