@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
             if (!verifiedToken) {
                 return res.status(401).send({msg: "Not authorized."});            
             } else {
-                req.user = receivedToken;
+                req.user = verifiedToken;
                 next();
             }
         }
