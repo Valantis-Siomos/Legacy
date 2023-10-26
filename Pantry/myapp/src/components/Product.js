@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import jwt_decode from "jwt-decode";
 import "../components/product.css";
 
 function Product({ getAllProducts, products }) {
@@ -74,25 +75,25 @@ function Product({ getAllProducts, products }) {
             <label>Category:</label>
             <span>{product.category}</span>
             <div className="buttonsContainer">
-              <button
-                onClick={() => deleteProduct(product._id)}
-                className="deleteButton"
-              >
-                <i className="material-icons">Delete</i>
-              </button>
-              <button
-                onClick={() => {
-                  setEditProduct({
-                    id: product._id,
-                    name: product.name,
-                    expirationDate: product.expirationDate,
-                    category: product.category,
-                  });
-                }}
-                className="editButton"
-              >
-                <i className="material-icons">Edit</i>
-              </button>
+
+            {token && creatorIds.include(product._id) &&(
+            <button onClick={() => deleteProduct(product._id)} className="deleteButton">
+              <i className="material-icons">Delete</i>
+            </button>
+            )}
+            <button
+              onClick={() => {
+                setEditProduct({
+                  id: product._id,
+                  name: product.name,
+                  expirationDate: product.expirationDate,
+                  category: product.category
+                });
+              }} className="editButton"
+            >
+              <i className="material-icons">Edit</i>
+            </button>
+         
             </div>
           </div>
 
