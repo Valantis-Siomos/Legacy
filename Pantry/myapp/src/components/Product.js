@@ -6,23 +6,26 @@ function Product({ getAllProducts, products }) {
   const [newProduct, setNewProduct] = useState({
     name: "",
     expirationDate: Date,
-    category: ""
+    category: "",
   });
 
   const [editProduct, setEditProduct] = useState({
     id: null,
     name: "",
     expirationDate: new Date().toISOString().split("T")[0],
-    category: ""
+    category: "",
   });
 
   async function deleteProduct(id) {
-    try {
-      await axios.delete(`http://localhost:8000/products/${id}`);
-    } catch (error) {
-      console.log("Error deleting product:", error);
+    const alertDeleteProduct = window.confirm("are you sure?");
+    if (alertDeleteProduct) {
+      try {
+        await axios.delete(`http://localhost:8000/products/${id}`);
+      } catch (error) {
+        console.log("Error deleting product:", error);
+      }
+      getAllProducts();
     }
-    getAllProducts();
   }
 
   // async function addProduct() {
@@ -44,13 +47,13 @@ function Product({ getAllProducts, products }) {
       await axios.put(`http://localhost:8000/products/${editProduct.id}`, {
         name: editProduct.name,
         expirationDate: editProduct.expirationDate,
-        category: editProduct.category
+        category: editProduct.category,
       });
       setEditProduct({
         id: null,
         name: "",
         expirationDate: "",
-        category: ""
+        category: "",
       });
       getAllProducts();
     } catch (error) {
@@ -71,21 +74,25 @@ function Product({ getAllProducts, products }) {
             <label>Category:</label>
             <span>{product.category}</span>
             <div className="buttonsContainer">
-            <button onClick={() => deleteProduct(product._id)} className="deleteButton">
-              <i className="material-icons">Delete</i>
-            </button>
-            <button
-              onClick={() => {
-                setEditProduct({
-                  id: product._id,
-                  name: product.name,
-                  expirationDate: product.expirationDate,
-                  category: product.category
-                });
-              }} className="editButton"
-            >
-              <i className="material-icons">Edit</i>
-            </button>
+              <button
+                onClick={() => deleteProduct(product._id)}
+                className="deleteButton"
+              >
+                <i className="material-icons">Delete</i>
+              </button>
+              <button
+                onClick={() => {
+                  setEditProduct({
+                    id: product._id,
+                    name: product.name,
+                    expirationDate: product.expirationDate,
+                    category: product.category,
+                  });
+                }}
+                className="editButton"
+              >
+                <i className="material-icons">Edit</i>
+              </button>
             </div>
           </div>
 
@@ -101,11 +108,11 @@ function Product({ getAllProducts, products }) {
               />
               <input
                 type="text"
-                value={(editProduct.expirationDate.split("T")[0])}
+                value={editProduct.expirationDate.split("T")[0]}
                 onChange={(e) =>
                   setEditProduct({
                     ...editProduct,
-                    expirationDate: e.target.value
+                    expirationDate: e.target.value,
                   })
                 }
               />
