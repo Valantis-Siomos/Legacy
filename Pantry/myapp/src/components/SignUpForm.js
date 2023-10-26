@@ -22,7 +22,7 @@ function Register() {
             <label>Email</label><br/>
             <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
             <label>Password</label><br/>
-            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
             <input type="submit" value="Sign Up"/>
         </form>
     </div>

@@ -40,9 +40,10 @@ function Navbar() {
      ) : (
         <nav className="navbar">
           <div className="linkGroup">
-          
+            
             <Link className="link">{decoded.email}</Link>
             <Link to="/" className="link">Home</Link>
+            <Link to="/products" className="link">Items</Link>
             <Link to="/form" className="link">Create</Link>
             <Link onClick={handleLogout} className="link">Log Out</Link>
           </div>
