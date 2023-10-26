@@ -1,9 +1,25 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import "../components/product.css";
 
 function Product({ getAllProducts, products }) {
+  const [creatorIds, setCreatorIds] = useState([]);
+  let token = localStorage.getItem("token");
+  const decoded = token ? jwt_decode(token) : null;
+
+  useEffect(() => {
+    if (decoded) {
+      function filtered() {
+        let updateCreatorIds = products
+          .filter((p) => p.owner._id === decoded.id)
+          .map((p) => p._id);
+        setCreatorIds(updateCreatorIds);
+      }
+      filtered();
+    }
+  }, [products]);
+
   const [newProduct, setNewProduct] = useState({
     name: "",
     expirationDate: Date,
@@ -65,70 +81,80 @@ function Product({ getAllProducts, products }) {
   return (
     <div>
       {/* Render Existing Products */}
-      {products.map((product) => (
-        <div key={product._id} className="productCard">
-          <div className="product">
-            <label>Product:</label>
-            <span>{product.name}</span>
-            <label>Expired Date:</label>
-            <span>{new Date(product.expirationDate).toLocaleDateString()}</span>
-            <label>Category:</label>
-            <span>{product.category}</span>
-            <div className="buttonsContainer">
+      {products.map((product) => {
+        if (creatorIds.includes(product._id)) {
+          return (
+            <div key={product._id} className="productCard">
+              <div className="product">
+                <label>Product:</label>
+                <span>{product.name}</span>
+                <label>Expired Date:</label>
+                <span>
+                  {new Date(product.expirationDate).toLocaleDateString()}
+                </span>
+                <label>Category:</label>
+                <span>{product.category}</span>
+                <div className="buttonsContainer">
+                  <button
+                    onClick={() => deleteProduct(product._id)}
+                    className="deleteButton"
+                  >
+                    <i className="material-icons">Delete</i>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setEditProduct({
+                        id: product._id,
+                        name: product.name,
+                        expirationDate: product.expirationDate,
+                        category: product.category,
+                      });
+                    }}
+                    className="editButton"
+                  >
+                    <i className="material-icons">Edit</i>
+                  </button>
+                </div>
+              </div>
 
-            {token && creatorIds.include(product._id) &&(
-            <button onClick={() => deleteProduct(product._id)} className="deleteButton">
-              <i className="material-icons">Delete</i>
-            </button>
-            )}
-            <button
-              onClick={() => {
-                setEditProduct({
-                  id: product._id,
-                  name: product.name,
-                  expirationDate: product.expirationDate,
-                  category: product.category
-                });
-              }} className="editButton"
-            >
-              <i className="material-icons">Edit</i>
-            </button>
-         
+              {/* Render the text as editable input if currently being edited */}
+              {editProduct.id === product._id && (
+                <div className="editForm">
+                  <input
+                    type="text"
+                    value={editProduct.name}
+                    onChange={(e) =>
+                      setEditProduct({ ...editProduct, name: e.target.value })
+                    }
+                  />
+                  <input
+                    type="text"
+                    value={editProduct.expirationDate.split("T")[0]}
+                    onChange={(e) =>
+                      setEditProduct({
+                        ...editProduct,
+                        expirationDate: e.target.value,
+                      })
+                    }
+                  />
+                  <input
+                    type="text"
+                    value={editProduct.category}
+                    onChange={(e) =>
+                      setEditProduct({
+                        ...editProduct,
+                        category: e.target.value,
+                      })
+                    }
+                  />
+                  <button onClick={updateProduct}>Save</button>
+                </div>
+              )}
             </div>
-          </div>
-
-          {/* Render the text as editable input if currently being edited */}
-          {editProduct.id === product._id && (
-            <div className="editForm">
-              <input
-                type="text"
-                value={editProduct.name}
-                onChange={(e) =>
-                  setEditProduct({ ...editProduct, name: e.target.value })
-                }
-              />
-              <input
-                type="text"
-                value={editProduct.expirationDate.split("T")[0]}
-                onChange={(e) =>
-                  setEditProduct({
-                    ...editProduct,
-                    expirationDate: e.target.value,
-                  })
-                }
-              />
-              <input
-                type="text"
-                value={editProduct.category}
-                onChange={(e) =>
-                  setEditProduct({ ...editProduct, category: e.target.value })
-                }
-              />
-              <button onClick={updateProduct}>Save</button>
-            </div>
-          )}
-        </div>
-      ))}
+          );
+        }
+        return null; // Skip rendering if the user doesn't own the product
+      })}
     </div>
   );
 }
