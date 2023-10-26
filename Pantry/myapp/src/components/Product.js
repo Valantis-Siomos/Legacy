@@ -7,51 +7,54 @@ function Product({ getAllProducts, products }) {
   const [newProduct, setNewProduct] = useState({
     name: "",
     expirationDate: Date,
-    category: ""
+    category: "",
   });
 
   const [editProduct, setEditProduct] = useState({
     id: null,
     name: "",
-    expirationDate: Date,
-    category: ""
+    expirationDate: new Date().toISOString().split("T")[0],
+    category: "",
   });
 
   async function deleteProduct(id) {
-    try {
-      await axios.delete(`http://localhost:8000/products/${id}`);
-    } catch (error) {
-      console.log("Error deleting product:", error);
+    const alertDeleteProduct = window.confirm("are you sure?");
+    if (alertDeleteProduct) {
+      try {
+        await axios.delete(`http://localhost:8000/products/${id}`);
+      } catch (error) {
+        console.log("Error deleting product:", error);
+      }
+      getAllProducts();
     }
-    getAllProducts();
   }
 
-  async function addProduct() {
-    try {
-      await axios.post("http://localhost:8000/products", newProduct);
-      setNewProduct({
-        name: "",
-        expirationDate: "",
-        category: ""
-      });
-      getAllProducts();
-    } catch (error) {
-      console.error("Error adding product:", error);
-    }
-  }
+  // async function addProduct() {
+  //   try {
+  //     await axios.post("http://localhost:8000/products", newProduct);
+  //     setNewProduct({
+  //       name: "",
+  //       expirationDate: "",
+  //       category: ""
+  //     });
+  //     getAllProducts();
+  //   } catch (error) {
+  //     console.error("Error adding product:", error);
+  //   }
+  // }
 
   async function updateProduct() {
     try {
       await axios.put(`http://localhost:8000/products/${editProduct.id}`, {
         name: editProduct.name,
         expirationDate: editProduct.expirationDate,
-        category: editProduct.category
+        category: editProduct.category,
       });
       setEditProduct({
         id: null,
         name: "",
         expirationDate: "",
-        category: ""
+        category: "",
       });
       getAllProducts();
     } catch (error) {
@@ -65,10 +68,14 @@ function Product({ getAllProducts, products }) {
       {products.map((product) => (
         <div key={product._id} className="productCard">
           <div className="product">
+            <label>Product:</label>
             <span>{product.name}</span>
-            <span>{product.expirationDate}</span>
+            <label>Expired Date:</label>
+            <span>{new Date(product.expirationDate).toLocaleDateString()}</span>
+            <label>Category:</label>
             <span>{product.category}</span>
             <div className="buttonsContainer">
+
             {token && creatorIds.include(product._id) &&(
             <button onClick={() => deleteProduct(product._id)} className="deleteButton">
               <i className="material-icons">Delete</i>
@@ -86,7 +93,7 @@ function Product({ getAllProducts, products }) {
             >
               <i className="material-icons">Edit</i>
             </button>
-            
+         
             </div>
           </div>
 
@@ -102,11 +109,11 @@ function Product({ getAllProducts, products }) {
               />
               <input
                 type="text"
-                value={editProduct.expirationDate}
+                value={editProduct.expirationDate.split("T")[0]}
                 onChange={(e) =>
                   setEditProduct({
                     ...editProduct,
-                    expirationDate: e.target.value
+                    expirationDate: e.target.value,
                   })
                 }
               />
