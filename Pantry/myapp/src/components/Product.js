@@ -81,6 +81,7 @@ function Product({ getAllProducts, products }) {
   return (
     <div>
       {/* Render Existing Products */}
+
       {products.map((product) => {
         if (creatorIds.includes(product._id)) {
           return (
@@ -116,6 +117,7 @@ function Product({ getAllProducts, products }) {
                   </button>
                 </div>
               </div>
+
 
               {/* Render the text as editable input if currently being edited */}
               {editProduct.id === product._id && (
