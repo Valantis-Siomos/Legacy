@@ -1,6 +1,4 @@
-/* html {
-    background-color: #90ADC6;
-} */
+
 
 * {
     margin: 0px;
@@ -12,6 +10,8 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
+    height: 87.9vh;
+    background-color: #e0e0e0;
 }
 
 .productCard {
@@ -49,7 +49,7 @@ button {
     font-size: 1.2em;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color:#333652;
+    background-color:#0a6e0a;
     color: #E9EAEC;
     padding: 5px;
 }
@@ -79,9 +79,25 @@ button {
     width: 350px;
     box-shadow: 0px 0px 20px 1px  black;
     margin-top: 50px;
-    padding: 0;
+    margin-bottom: 50px;
+    padding: 4px;
     border: #333652;
     text-align: center;
+    background-color: white;
+    border-radius: 18px;
+}
+
+.searchdiv:hover {
+    box-shadow: 0px 0px 20px 1px  rgb(255, 255, 255);
+}
+
+#searchInput {
+    border: 1px solid transparent;
+    color: #030305;
+    font-size: 1.2em;
+    padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 0 9px 1px inset #ffffff;
 }
 
 
