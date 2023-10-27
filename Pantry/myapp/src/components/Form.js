@@ -42,7 +42,7 @@ function Form({ getAllProducts }) {
       })
       .then(() => {
         getAllProducts();
-        navigate("/")
+        navigate("/products")
       })
       .catch((err) => console.log(err));
   };
