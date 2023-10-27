@@ -70,6 +70,7 @@ function Product({ getAllProducts, products }) {
     <div>
       <div className="searchdiv">
         <input
+        id="searchInput"
           type="text"
           placeholder="Search your product here"
           value={searchTerm}
