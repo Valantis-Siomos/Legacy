@@ -1,53 +1,75 @@
 .formContainer {
     display: flex;
-    width: 100%;
-    height: 30em;
-    margin-left: 35%;
-    margin-top: 3%;
+    /* align-items: center; */
+    justify-content: center;
+    background-color: #e0e0e0;
+    height: 87.9vh;
 }
 
 .form {
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     justify-content: center;
     align-content: center;
-    background-color: #90ADC6;
-    color: #333652;
+    background-color: #388e3cde;
+    color: #ffffff;
     border: 1px solid transparent;
     border-radius: 5px;
-    width: 30%;
+    height: 350px;
+    width: 490px;
     flex-wrap: wrap;
 }
 
 label {
-    font-family: Arial;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.2em;
 }
 
 input[type=text] {
     border: 1px solid transparent;
-    color: #333652;
+    color: #030305;
     font-size: 1.2em;
     padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 0 9px 1px inset #1d1716;
 }
 
 input[type=text]:focus {
     border: 1px solid transparent;
     outline: none;
+    box-shadow: 0 0 15px 3px  #1d1716;
+    
+}
+input[type=password] {
+    border: 1px solid transparent;
+    color: #030305;
+    font-size: 1.2em;
+    padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 0 9px 1px inset #1d1716;
+}
+input[type=password]:focus{
+    box-shadow: 0 0 15px 3px  #1d1716;
+   
 }
 
 input[type=date] {
     border: 1px solid transparent;
     outline: none;
     font-size: 1.2em;
-    color: #333652;
+    color: #020202;
+    padding: 4px;
+    border-radius: 6px;
+    box-shadow: 0 0 9px 1px inset #1d1716;
 }
 
 input[type=date]:focus {
     border: 1px solid transparent;
     outline: none;
     font-size: 1.2em;
+    box-shadow: 0 0 15px 3px  #1d1716;
 }
 
 button[type=submit] {
@@ -55,17 +77,23 @@ button[type=submit] {
     font-size: 1.2em;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color:#333652;
-    color: #E9EAEC;
+    background-color:#1d1716c6;
+    color: #ffffff;
     padding: 5px;
+    border-radius: 6px;
 }
 
 input[type=submit] {
+    margin-top: 15px;
     font-family: Arial;
     font-size: 1.2em;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color:#333652;
+    background-color:#1d1716b0;
     color: #E9EAEC;
     padding: 5px;
+    border-radius: 6px;
+}
+h2{
+    font-family: sans-serif;
 }
