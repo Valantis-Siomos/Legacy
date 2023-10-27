@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 function Product({ getAllProducts, products }) {
   const [creatorIds, setCreatorIds] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); 
   const token = localStorage.getItem("token");
   const decoded = token ? jwt_decode(token) : null;
 
@@ -60,8 +61,21 @@ function Product({ getAllProducts, products }) {
     }
   }
 
+  // lowerCase save us!!
+  const filteredProducts = products.filter((product) => {
+    return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div>
+      <div className="searchdiv">
+        <input
+          type="text"
+          placeholder="Search your product here"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       {creatorIds.length === 0 ? (
         <p>Please click <a><Link to="/form" className="linko">here</Link></a> to add an item.</p>
       ) : (
@@ -75,7 +89,7 @@ function Product({ getAllProducts, products }) {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => {
+            {filteredProducts.map((product) => {
               if (creatorIds.includes(product._id)) {
                 return (
                   <tr key={product._id}>
