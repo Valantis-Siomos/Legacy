@@ -18,7 +18,7 @@ function Login() {
             console.log(res.data);
             if (res.status === 200) {
                 localStorage.setItem("token", res.data.token);
-                navigate("/");
+                navigate("/products");
             }
         } catch (err) {
             alert("Log in failed, check your email or password.");

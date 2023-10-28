@@ -17,14 +17,14 @@ app.use(cors());
 app.use("/products", Router);
 app.use("/products", userRouter);
 
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).send("Server Error");
-});
+// app.use((err, req, res, next) => {
+//   console.error(err);
+//   res.status(500).send("Server Error");
+// });
 
-app.get("/testToken", verifyToken, async (req, res) => {
-  res.send("protected route");
-});
+// app.get("/testToken", verifyToken, async (req, res) => {
+//   res.send("protected route");
+// });
 
 app.listen(port, () => {
   console.log(`listening to ${port}`);

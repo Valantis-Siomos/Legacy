@@ -1,47 +1,46 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import "../components/product.css";
+import { Link } from "react-router-dom";
+
 
 function Product({ getAllProducts, products }) {
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    expirationDate: Date,
-    category: "",
-  });
+  const [creatorIds, setCreatorIds] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); 
+  const token = localStorage.getItem("token");
+  const decoded = token ? jwt_decode(token) : null;
+
+  useEffect(() => {
+    if (decoded) {
+      function filterProductsByOwner() {
+        const updateCreatorIds = products
+          .filter((p) => p.owner._id === decoded.id)
+          .map((p) => p._id);
+        setCreatorIds(updateCreatorIds);
+      }
+      filterProductsByOwner();
+    }
+  }, [products]);
 
   const [editProduct, setEditProduct] = useState({
     id: null,
     name: "",
-    expirationDate: new Date().toISOString().split("T")[0],
+    expirationDate: "",
     category: "",
   });
 
   async function deleteProduct(id) {
-    const alertDeleteProduct = window.confirm("are you sure?");
+    const alertDeleteProduct = window.confirm("Are you sure?");
     if (alertDeleteProduct) {
       try {
         await axios.delete(`http://localhost:8000/products/${id}`);
+        getAllProducts();
       } catch (error) {
         console.log("Error deleting product:", error);
       }
-      getAllProducts();
     }
   }
-
-  // async function addProduct() {
-  //   try {
-  //     await axios.post("http://localhost:8000/products", newProduct);
-  //     setNewProduct({
-  //       name: "",
-  //       expirationDate: "",
-  //       category: ""
-  //     });
-  //     getAllProducts();
-  //   } catch (error) {
-  //     console.error("Error adding product:", error);
-  //   }
-  // }
 
   async function updateProduct() {
     try {
@@ -62,73 +61,122 @@ function Product({ getAllProducts, products }) {
     }
   }
 
+  // lowerCase save us!!
+  const filteredProducts = products.filter((product) => {
+    return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
-    <div>
-      {/* Render Existing Products */}
-      {products.map((product) => (
-        <div key={product._id} className="productCard">
-          <div className="product">
-            <label>Product:</label>
-            <span>{product.name}</span>
-            <label>Expired Date:</label>
-            <span>{new Date(product.expirationDate).toLocaleDateString()}</span>
-            <label>Category:</label>
-            <span>{product.category}</span>
-            <div className="buttonsContainer">
-
-            {token && creatorIds.include(product._id) &&(
-            <button onClick={() => deleteProduct(product._id)} className="deleteButton">
-              <i className="material-icons">Delete</i>
-            </button>
-            )}
-            <button
-              onClick={() => {
-                setEditProduct({
-                  id: product._id,
-                  name: product.name,
-                  expirationDate: product.expirationDate,
-                  category: product.category
-                });
-              }} className="editButton"
-            >
-              <i className="material-icons">Edit</i>
-            </button>
-         
-            </div>
-          </div>
-
-          {/* Render the text as editable input if currently being edited */}
-          {editProduct.id === product._id && (
-            <div className="editForm">
-              <input
-                type="text"
-                value={editProduct.name}
-                onChange={(e) =>
-                  setEditProduct({ ...editProduct, name: e.target.value })
-                }
-              />
-              <input
-                type="text"
-                value={editProduct.expirationDate.split("T")[0]}
-                onChange={(e) =>
-                  setEditProduct({
-                    ...editProduct,
-                    expirationDate: e.target.value,
-                  })
-                }
-              />
-              <input
-                type="text"
-                value={editProduct.category}
-                onChange={(e) =>
-                  setEditProduct({ ...editProduct, category: e.target.value })
-                }
-              />
-              <button onClick={updateProduct}>Save</button>
-            </div>
-          )}
-        </div>
-      ))}
+    <div className="item-table-div" >
+      <div className="searchdiv">
+        <input
+        id="searchInput"
+          type="text"
+          placeholder="Search your product here"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      {creatorIds.length === 0 ? (
+        <p>Please click <Link to="/form" className="linko">here</Link> to add an item.</p>
+      ) : (
+        <table className="productTable">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Expired Date</th>
+              <th>Category</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredProducts.map((product) => {
+              if (creatorIds.includes(product._id)) {
+                return (
+                  <tr key={product._id}>
+                    <td>
+                      {editProduct.id === product._id ? (
+                        <input
+                          type="text"
+                          value={editProduct.name}
+                          onChange={(e) =>
+                            setEditProduct({
+                              ...editProduct,
+                              name: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        product.name
+                      )}
+                    </td>
+                    <td>
+                      {editProduct.id === product._id ? (
+                        <input
+                          type="text"
+                          value={editProduct.expirationDate.split("T")[0]}
+                          onChange={(e) =>
+                            setEditProduct({
+                              ...editProduct,
+                              expirationDate: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        new Date(product.expirationDate).toLocaleDateString()
+                      )}
+                    </td>
+                    <td>
+                      {editProduct.id === product._id ? (
+                        <input
+                          type="text"
+                          value={editProduct.category}
+                          onChange={(e) =>
+                            setEditProduct({
+                              ...editProduct,
+                              category: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        product.category
+                      )}
+                    </td>
+                    <td>
+                      {editProduct.id === product._id ? (
+                        <button onClick={updateProduct}>Save</button>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => deleteProduct(product._id)}
+                            className="deleteButton"
+                          >
+                            Delete
+                          </button>
+                          <button
+                            onClick={() =>
+                              setEditProduct({
+                                id: product._id,
+                                name: product.name,
+                                expirationDate: product.expirationDate,
+                                category: product.category,
+                              })
+                            }
+                            className="editButton"
+                          >
+                            Edit
+                          </button>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                );
+              }
+              return null; // Skip rendering if the user doesn't own the product
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

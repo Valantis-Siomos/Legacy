@@ -1,10 +1,16 @@
-/* html {
-    background-color: #90ADC6;
-} */
+
 
 * {
     margin: 0px;
     padding: 0px;
+   
+}
+
+.item-table-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
 
 .productGrid {
@@ -12,6 +18,13 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
+    height: 87.9vh;
+    /* background-color: #e0e0e0; */
+    background-image: url(../assets/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    
 }
 
 .productCard {
@@ -46,16 +59,21 @@ span {
 
 button {
     font-family: Arial;
-    font-size: 1.2em;
+    font-size: 0.7em;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color:#333652;
+    background-color:#0a6e0ad1;
     color: #E9EAEC;
     padding: 5px;
+    border-radius: 3px;
+}
+button:hover{
+    box-shadow: 0 0 4px 1px  #000000;
 }
 
 .deleteButton {
     margin-right: 1em;
+    /* margin-left: 50%; */
 } 
 
 .editForm {
@@ -71,3 +89,72 @@ button {
     padding: 15px; 
     margin-left: 1em;
 }
+
+
+
+.searchdiv {
+    box-sizing: border-box;
+    width: 350px;
+    box-shadow: 0px 0px 20px 1px  black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 4px;
+    border: #333652;
+    text-align: center;
+    background-color: white;
+    border-radius: 18px;
+}
+
+.searchdiv:hover {
+    box-shadow: 0px 0px 20px 1px  rgb(255, 255, 255);
+}
+
+#searchInput {
+    border: 1px solid transparent;
+    color: #030305;
+    font-size: 1.2em;
+    padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 0 9px 1px inset #ffffff;
+}
+
+table{
+    border-collapse: collapse;
+    background: #ffffff;
+    width: 50vw;
+    min-width: 600px;
+    box-shadow: 0 0 8px 1px  #190f0f;
+    font-size: 1.2em;
+    text-align: left;
+    
+    
+}
+ th,td {
+    padding: 0.5rem;
+    padding-left: 1rem;
+ }
+
+ th {
+    background: #0a6e0acb;
+    text-align: left;
+ }
+
+ tr:nth-of-type(2n) {
+    background: #0a6e0a2c;
+ }
+
+ td:last-child
+{
+  text-align: right;
+  padding-right: 15px;
+}
+
+th:last-child {
+    text-align: right;
+    padding-right: 35px;
+}
+
+
+/* .productTable {
+    margin-top: 20px;
+} */

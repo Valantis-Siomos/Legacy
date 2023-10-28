@@ -1,15 +1,19 @@
 import { useState } from "react";
 import axios from "axios";
 import "../components/form.css";
+import { useNavigate } from "react-router-dom"
+
+
 
 function Form({ getAllProducts }) {
+  const navigate = useNavigate();
   let token = localStorage.getItem("token");
   const [product, setProduct] = useState({
     name: "",
     expirationDate: "",   /*expirationDate: Date,     this here just destroy me.   The -->(Date)<--*/
     category: "",
   });
-
+  
   function handleInputChange(e) {
     const value = e.target.value;
     setProduct({
@@ -38,6 +42,7 @@ function Form({ getAllProducts }) {
       })
       .then(() => {
         getAllProducts();
+        navigate("/products")
       })
       .catch((err) => console.log(err));
   };

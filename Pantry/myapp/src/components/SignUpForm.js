@@ -18,11 +18,11 @@ function Register() {
     return (
     <div className="formContainer">
         <form onSubmit={handleRegister} value="SignUpForm" className="form">
-            <h2>Sign Up</h2><br/>
+            <h2>Register</h2><br/>
             <label>Email</label><br/>
             <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
             <label>Password</label><br/>
-            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
             <input type="submit" value="Sign Up"/>
         </form>
     </div>
