@@ -57,6 +57,16 @@ span {
     margin: 10px;
 }
 
+p {
+    color: white;
+}
+
+.linko {
+    text-decoration: none;
+    color: #09c509;
+
+}
+
 button {
     font-family: Arial;
     font-size: 0.7em;
