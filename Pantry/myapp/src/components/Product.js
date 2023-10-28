@@ -21,7 +21,7 @@ function Product({ getAllProducts, products }) {
       }
       filterProductsByOwner();
     }
-  }, [decoded, products]);
+  }, [products]);
 
   const [editProduct, setEditProduct] = useState({
     id: null,
@@ -67,7 +67,7 @@ function Product({ getAllProducts, products }) {
   });
 
   return (
-    <div>
+    <div className="item-table-div" >
       <div className="searchdiv">
         <input
         id="searchInput"
@@ -78,7 +78,7 @@ function Product({ getAllProducts, products }) {
         />
       </div>
       {creatorIds.length === 0 ? (
-        <p>Please click <a><Link to="/form" className="linko">here</Link></a> to add an item.</p>
+        <p>Please click <Link to="/form" className="linko">here</Link> to add an item.</p>
       ) : (
         <table className="productTable">
           <thead>

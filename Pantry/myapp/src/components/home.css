@@ -1,6 +1,7 @@
 .img {
     height: 88.7vh;
     
+    
 }
 
 .body {
@@ -9,6 +10,7 @@
     align-items: center;
     position: relative;
     background-color: #e0e0e0;
+    
 }
 
 

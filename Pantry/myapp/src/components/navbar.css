@@ -2,7 +2,7 @@
 .title {
     color: #E9EAEC;
     background-image: linear-gradient(180deg,#0a6e0a,#388e3c);
-   
+    /* background-image: linear-gradient(180deg,#0a6e0a,#388e3c); */
     text-align: center;
     height: 43px;
     
@@ -15,7 +15,9 @@
     align-content: center;
     height: 70px;
     background-image: linear-gradient(180deg,#1d1716,#1d1716);
-    /* background-color:#2d6e7e; */
+    box-shadow: 0 0 15px 3px  #1d1716;
+    position: relative;
+    z-index: 2;
 }
 
 .linkGroup {
@@ -38,7 +40,7 @@
 
 .link:hover {
     text-decoration: none;
-    color: #90ADC6;
+    color: #72df72;
 }
 
 .link:active {
