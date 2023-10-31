@@ -14,7 +14,7 @@ function App() {
   async function getAllProducts() {
     try {
       await axios
-        .get("http://localhost:8000/products")
+        .get("https://pantry-3333.onrender.com/products")
         .then((res) => setProducts(res.data));
       console.log(products);
     } catch (error) {
