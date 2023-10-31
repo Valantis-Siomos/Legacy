@@ -37,7 +37,7 @@ function Form({ getAllProducts }) {
       return;
     }
     axios
-      .post("http://localhost:8000/products/create", product, {
+      .post("https://pantry-3333.onrender.com/products/create", product, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
