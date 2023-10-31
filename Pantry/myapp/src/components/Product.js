@@ -34,7 +34,7 @@ function Product({ getAllProducts, products }) {
     const alertDeleteProduct = window.confirm("Are you sure?");
     if (alertDeleteProduct) {
       try {
-        await axios.delete(`http://localhost:8000/products/${id}`);
+        await axios.delete(`https://pantry-3333.onrender.com/products/${id}`);
         getAllProducts();
       } catch (error) {
         console.log("Error deleting product:", error);
@@ -44,7 +44,7 @@ function Product({ getAllProducts, products }) {
 
   async function updateProduct() {
     try {
-      await axios.put(`http://localhost:8000/products/${editProduct.id}`, {
+      await axios.put(`https://pantry-3333.onrender.com/products/${editProduct.id}`, {
         name: editProduct.name,
         expirationDate: editProduct.expirationDate,
         category: editProduct.category,
