@@ -14,7 +14,7 @@ function Login() {
     async function handleLogin(e) {
         try {
             e.preventDefault();
-            let res = await axios.post("http://localhost:8000/products/login", { email, password });
+            let res = await axios.post("https://pantry-3333.onrender.com/products/login", { email, password });
             console.log(res.data);
             if (res.status === 200) {
                 localStorage.setItem("token", res.data.token);
